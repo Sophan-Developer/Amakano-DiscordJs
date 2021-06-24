@@ -1,5 +1,5 @@
 const { Message, MessageEmbed } = require('discord.js');
-const discord = require('discord.js');
+const Discord = require('discord.js');
 
 const { NekoBot } = require("nekobot-api");
 const api = new NekoBot(`015445535454455354D6`);

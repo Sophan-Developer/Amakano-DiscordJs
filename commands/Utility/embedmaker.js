@@ -4,8 +4,8 @@ const { MessageButton, MessageActionRow } = require("discord-buttons")
 module.exports = {
  name: "embedmaker",
  aliases: ['embed','em'],
- usage: "test",
- description: "make a embed",
+ usage: "makes embed for u cuz u r too lazy",
+ description: "button embed maker",
  run: async(client, message, args) => {
 
 
