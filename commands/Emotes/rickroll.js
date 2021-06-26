@@ -1,14 +1,16 @@
 let Discord = require('discord.js');
 
 module.exports = {
-  name: "rickroll",
-  aliases: [],
+  name: "nitro",
+  aliases: ['genratenitro'],
   usage: "rickroll",
   description: "rickroll",
   run: async (client, message, args) => {
-      let rickroll = new Discord.MessageEmbed()
-        .setTitle('RickRoll')
-        .setImage('https://media1.tenor.com/images/8c409e6f39acc1bd796e8031747f19ad/tenor.gif?itemid=17029825.gif')
-    message.channel.send(rickroll)    
+ let nitro = new Discord.MessageEmbed()
+ .setTitle("**Nitro Generator**")
+ .setDescription(":diamond: __Nitro Code__\n[Click Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) To Redeem Your Nitro!:diamond:")
+ .setColor("RED")
+ .setFooter("Free Nitro! Wohoo")
+ message.channel.send(nitro)
   }
 }

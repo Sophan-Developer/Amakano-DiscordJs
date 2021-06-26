@@ -26,8 +26,8 @@ module.exports = async(client, message) => { //need to be an async function
     let command = client.commands.get(cmd);
     // If none is found, try to find it by alias
     if (!command) command = client.commands.get(client.aliases.get(cmd));
-
-    // If a command is finally found, run the command
+    
+    // If a command is finally found, run the 
     if (command) 
         command.run(client, message, args);
  

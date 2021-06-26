@@ -8,19 +8,19 @@ module.exports = {
  description: "for test",
  run: async(client, message, args) => {
 
- if (message.channel.nsfw === true) {
- 
- message.channel.send("vheck");
- } else {
-message.delete({timeout: 10000})
- const notnsfw = new discord.MessageEmbed()
- .setTitle("🚫 NSFW")
- .setDescription("The process has been blocked because the current channel is not marked as NSFW!")
- .setColor('#f50000')
- .setFooter("This message disappears in 10 seconds.")
- message.channel.send(notnsfw).then(message => {
- message.delete({timeout: 10000})
- })
- }
- }
+  if (message.author.id != message.guild.ownerID) {
+    const noOwner = new Discord.MessageEmbed()
+      .setAuthor(
+        `${message.author.username}#${message.author.discriminator}`,
+        message.author.displayAvatarURL({ dynamic: true })
+      )
+      .setTitle("Ownership Only:")
+      .setDescription(
+        `You have been stopped from forming a server via ${client.user.username} as you are missing ownership.`
+      )
+      .setColor(0xff0000)
+      .setFooter("Prefix: [-]");
+    message.channel.send(noOwner);
+  }
+}
 }

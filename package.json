@@ -10,6 +10,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "acorn": "^8.4.1",
     "animequote": "^1.1.1",
     "ascii-table": "^0.0.9",
     "atob": "^2.1.2",
@@ -24,6 +25,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "^0.0.2",
+    "fsevents": "^2.3.2",
     "getyoutubesubscriber": "^0.1.4",
     "google-play-scraper": "^8.0.2",
     "got": "^11.8.1",
@@ -32,13 +34,14 @@
     "jimp": "^0.16.1",
     "kitsu": "^10.0.0-alpha.13",
     "kitsu-node-js": "^1.0.2",
+    "moment": "^2.29.1",
     "moments": "0.0.2",
     "ms": "^2.1.3",
     "nekobot-api": "^2.1.0",
     "nekos.life": "^2.0.7",
     "node-fetch": "^2.6.1",
     "node-opus": "^0.3.3",
-    "nuggies": "^1.0.9",
+    "nuggies": "^1.1.3",
     "parse-ms": "^3.0.0",
     "path": "^0.12.7",
     "quick.db": "^7.1.3",
@@ -52,7 +55,7 @@
     "srod-v2": "^1.0.2",
     "superagent": "^6.1.0",
     "weather-js": "^2.0.0",
-    "weky": "^2.0.7"
+    "weky": "^2.0.9"
   },
   "engines": {
     "node": "12.x"
