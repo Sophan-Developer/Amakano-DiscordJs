@@ -13,9 +13,11 @@ module.exports = {
             async function no_ping() {
                 const GIF = await neko.sfw.cuddle();
                 const embed = new Discord.MessageEmbed()
-                .setColor('#202225')
-                .setTitle(`${message.author.tag} cuddled themselves`)
+                .setColor('#f01390')
+                .setTitle(":open_hands: Cuddle")
+                .setDescription(`${message.author.tag} cuddled themselves`)
                 .setImage(GIF.url)
+                .setFooter(`Requested by ${message.author.username}`)
                 message.channel.send(embed);
             }
             no_ping();
@@ -25,9 +27,11 @@ module.exports = {
             const member = message.mentions.members.first();
             const GIF = await neko.sfw.cuddle();
             const embed = new Discord.MessageEmbed()
-            .setColor('#202225')
-            .setTitle(`${message.author.tag} cuddled ${member.user.tag}`)
+            .setColor('#f01390')
+            setTitle(":open_hands: Cuddle")
+            .setDescription(`${message.author.tag} cuddled ${member.user.tag}`)
             .setImage(GIF.url)
+            .setFooter(`Requested by ${message.author.username}`)
             message.channel.send(embed);
             }
             ping();

@@ -1,24 +1,37 @@
-let Discord = require("discord.js");
-const canvacord = require("canvacord");
-const Canvas = require("discord-canvas")
+const Discord = require('discord.js');
+const nekoclient = require('nekos.life');
+const neko = new nekoclient();
 
 module.exports = {
-  name: "kiss",
-  aliases: [],
-  usage: "kiss",
-  description: "show kissing image",
-  run: async (client, message, args) => {
-
-  let author = message.author
-  let user = message.mentions.users.first()
-  if(!user) return message.reply("mention someone to lob")
-  let avatar1 = author.displayAvatarURL({ format: "png", dynamic: false })
-  let avatar2 = user.displayAvatarURL({ format: "png", dynamic: false })
-  let image = await canvacord.Canvas.kiss(avatar1 ,avatar2)
-  let ATTC = new Discord.MessageAttachment(image, "kiss.png")
-  message.reply(ATTC)
-   
-
-
-  }
+    name: 'kiss',
+    run(client, message, args){
+        if (!message.guild) return;
+            if (message.mentions.members.size === 0) {
+            async function no_ping() {
+                const GIF = await neko.sfw.kiss();
+                const embed = new Discord.MessageEmbed()
+                .setTitle(":kiss: Kiss")
+                .setColor('#f01390')
+                .setFooter(`Requested by ${message.author.username}`)
+                .setDescription(`${message.author.username} kissed themselves`)
+                .setImage(GIF.url)
+                message.channel.send(embed);
+            }
+            no_ping();
+            }
+            if (message.mentions.members.size !== 0) {
+            async function ping() {
+            const member = message.mentions.members.first();
+            const GIF = await neko.sfw.kiss();
+            const embed = new Discord.MessageEmbed()
+            .setTitle(":kiss: Kiss")
+            .setColor('#f01390')
+            .setFooter(`Requested by ${message.author.username}`)
+            .setDescription(`${message.author.username} kissed ${member.user.username}`)
+            .setImage(GIF.url)
+            message.channel.send(embed);
+            }
+            ping();
+        }
+    }
 }

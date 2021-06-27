@@ -13,7 +13,14 @@ module.exports = {
 
   
      const image = await api.get("gah");
-     message.channel.send(image);
+     const embed = new Discord.MessageEmbed()
+      .setColor('#f01390')
+      .setTitle(":open_mouth: OMG!")
+      .setDescription("Oh My God!")
+      .setImage(image)
+      .setFooter(`Requested by ${message.author.username}`)
+    message.channel.send(embed)
+
    
   }
 }

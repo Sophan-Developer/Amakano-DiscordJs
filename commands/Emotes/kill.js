@@ -12,7 +12,7 @@ module.exports = {
       let kill = new Discord.MessageEmbed()
         .setTitle("Virtually killing the victim")
         .setDescription(`${victim} Died Lol`)
-        .setColor("RANDOM")
+        .setColor("#f01390")
         .setImage('https://imgur.com/eDzioxF.png')
         .setFooter('Dead RIP')
       message.channel.send(kill)

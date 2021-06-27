@@ -3,18 +3,18 @@ const nekoclient = require('nekos.life');
 const neko = new nekoclient();
 
 module.exports = {
-  name: "gasm",
+  name: "kuni",
   aliases: [],
-  usage: "gasm",
+  usage: "kuni",
   description: "NSFW",
   run: async(client, message, args) => {
 
     if (message.channel.nsfw === true) {
 
-      const GIF = await neko.nsfw.gasm();
+      const GIF = await neko.nsfw.kuni();
       const embed = new Discord.MessageEmbed()
         .setColor('#202225')
-        .setTitle(`${message.author.tag} here's a random gasm image/gif`)
+        .setTitle(`${message.author.tag} here's a random kuni image/gif`)
         .setImage(GIF.url)
       message.channel.send(embed);
     } else {

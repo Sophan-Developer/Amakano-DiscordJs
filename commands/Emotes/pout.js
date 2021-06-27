@@ -11,10 +11,10 @@ module.exports = {
 
 superagent.get('https://shiro.gg/api/images/pout').end((err, response) => {
   const embed = new Discord.MessageEmbed()
-  .setTitle("pout")
+  .setTitle(":rage: Pout")
   .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: pout`)
+  .setColor('#f01390')
+  .setFooter(`Requested by ${message.author.username}`)
   .setURL(response.body.url);
 message.channel.send(embed);
     })

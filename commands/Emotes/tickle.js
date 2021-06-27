@@ -1,22 +1,37 @@
-const { Message, MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
-const superagent = require('superagent');
+const nekoclient = require('nekos.life');
+const neko = new nekoclient();
 
 module.exports = {
-  name: "tickle",
-  aliases: [],
-  usage: "tickle",
-  description: "display Tickle",
-  run: async(client, message, args) => {
-
-superagent.get('https://shiro.gg/api/images/tickle').end((err, response) => {
-  const embed = new Discord.MessageEmbed()
-  .setTitle("Tickle")
-  .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: tickle`)
-  .setURL(response.body.url);
-message.channel.send(embed);
-    })
-  }
+    name: 'tickle',
+    run(client, message, args){
+        if (!message.guild) return;
+            if (message.mentions.members.size === 0) {
+            async function no_ping() {
+                const GIF = await neko.sfw.tickle();
+                const embed = new Discord.MessageEmbed()
+                .setColor('#f01390')
+                .setTitle(":rofl: Tickle")
+                .setFooter(`Requested by ${message.author.username}`)
+                .setDescription(`${message.author.tag} tickled themselves`)
+                .setImage(GIF.url)
+                message.channel.send(embed);
+            }
+            no_ping();
+            }
+            if (message.mentions.members.size !== 0) {
+            async function ping() {
+            const member = message.mentions.members.first();
+            const GIF = await neko.sfw.tickle();
+            const embed = new Discord.MessageEmbed()
+            .setColor('#f01390')
+            .setTitle(":rofl: Tickle")
+            .setFooter(`Requested by ${message.author.username}`)
+            .setDescription(`${message.author.tag} tickled ${member.user.tag}`)
+            .setImage(GIF.url)
+            message.channel.send(embed);
+            }
+            ping();
+        }
+    }
 }

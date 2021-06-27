@@ -1,22 +1,37 @@
-const { Message, MessageEmbed } = require('discord.js');
 const Discord = require('discord.js');
-const superagent = require('superagent');
+const nekoclient = require('nekos.life');
+const neko = new nekoclient();
 
 module.exports = {
-  name: "slap",
-  aliases: [],
-  usage: "slap",
-  description: "display slap",
-  run: async(client, message, args) => {
-
-superagent.get('https://shiro.gg/api/images/slap').end((err, response) => {
-  const embed = new Discord.MessageEmbed()
-  .setTitle("slap")
-  .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: slap`)
-  .setURL(response.body.url);
-message.channel.send(embed);
-    })
-  }
+    name: 'slap',
+    run(client, message, args){
+        if (!message.guild) return;
+            if (message.mentions.members.size === 0) {
+            async function no_ping() {
+                const GIF = await neko.sfw.slap();
+                const embed = new Discord.MessageEmbed()
+                .setColor('#f01390')
+                .setTitle(":clap: Slap")
+                .setDescription(`${message.author.username} slapped themselves`)
+                .setImage(GIF.url)
+                .setFooter(`Requested by ${message.author.username}`)
+                message.channel.send(embed);
+            }
+            no_ping();
+            }
+            if (message.mentions.members.size !== 0) {
+            async function ping() {
+            const member = message.mentions.members.first();
+            const GIF = await neko.sfw.slap();
+            const embed = new Discord.MessageEmbed()
+            .setColor('#f01390')
+            .setTitle(":clap: Slap")
+            .setDescription(`${message.author.username} slapped ${member.user.username}`)
+            .setImage(GIF.url)
+            .setFooter(`Requested by ${message.author.username}`)
+            message.channel.send(embed);
+            }
+            ping();
+        }
+    }
 }

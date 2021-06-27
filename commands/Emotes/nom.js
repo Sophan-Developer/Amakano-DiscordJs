@@ -13,8 +13,8 @@ superagent.get('https://shiro.gg/api/images/nom').end((err, response) => {
   const embed = new Discord.MessageEmbed()
   .setTitle("Nom NOm NOM")
   .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: nom`)
+  .setColor('#f01390')
+  .setFooter(`Requested by ${message.author.username}`)
   .setURL(response.body.url);
 message.channel.send(embed);
     })

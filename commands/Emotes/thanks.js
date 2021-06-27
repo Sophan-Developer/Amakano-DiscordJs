@@ -13,9 +13,9 @@ module.exports = {
       let thanks = new Discord.MessageEmbed()
         .setTitle("Sending Virtual Thanks")
         .setDescription(`${victim} was thanked by ${message.author}`)
-        .setColor("RANDOM")
         .setImage('https://imgur.com/CZYkr7c.png')
-        .setFooter("Virtual Thanks sent")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
       message.channel.send(thanks)
     }
 

@@ -10,9 +10,10 @@ module.exports = {
             async function no_ping() {
                 const GIF = await neko.sfw.feed();
                 const embed = new Discord.MessageEmbed()
-                .setColor('#202225')
-                .setTitle(`${message.author.tag} feeded themselves`)
+                .setColor('#f01390')
+                .setTitle(`${message.author.username} feeded themselves`)
                 .setImage(GIF.url)
+                .setFooter(`Requested by ${message.author.username}`)
                 message.channel.send(embed);
             }
             no_ping();
@@ -22,9 +23,10 @@ module.exports = {
             const member = message.mentions.members.first();
             const GIF = await neko.sfw.feed();
             const embed = new Discord.MessageEmbed()
-            .setColor('#202225')
-            .setTitle(`${message.author.tag} feeded ${member.user.tag}`)
+            .setColor('#f01390')
+            .setTitle(`${message.author.username} feeded ${member.user.username}`)
             .setImage(GIF.url)
+            .setFooter(`Requested by ${message.author.username}`)
             message.channel.send(embed);
             }
             ping();

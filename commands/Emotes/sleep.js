@@ -11,10 +11,11 @@ module.exports = {
 
 superagent.get('https://shiro.gg/api/images/sleep').end((err, response) => {
   const embed = new Discord.MessageEmbed()
-  .setTitle("sleep")
+  .setTitle(":zzz: Sleep")
+  .setDescription(`${message.author.tag} is sleeping tight :3`)
   .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: sleep`)
+  .setColor('#f01390')
+  .setFooter(`Requested by ${message.author.username}`)
   .setURL(response.body.url);
 message.channel.send(embed);
     })
