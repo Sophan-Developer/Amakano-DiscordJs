@@ -10,6 +10,11 @@ module.exports = {
   run: async(client, message, args) => {
 
     const catTEXT = await neko.sfw.catText();
-     message.channel.send(catTEXT.cat);
+    let embed = new Discord.MessageEmbed()
+      .setTitle("oWo")
+      .setDescription(catTEXT.cat)
+      .setColor("#cc70ba")
+      .setFooter(`Requested by ${message.author.username}`)
+     message.channel.send(embed);
   }
 }

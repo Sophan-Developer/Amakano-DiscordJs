@@ -10,9 +10,11 @@ module.exports = {
             async function waifu() {
             const GIF = await neko.sfw.waifu();
             const embed = new Discord.MessageEmbed()
-            .setColor('#202225')
-            .setTitle(`${message.author.tag} here's a random waifu image`)
-            .setImage(GIF.url)
+        .setTitle("WAIFU")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
+        .setDescription(`${message.author.username} here's a random Waifu for you :)`)
+        .setImage(GIF.url)
             message.channel.send(embed);
             }
             waifu();

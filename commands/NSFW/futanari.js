@@ -4,7 +4,7 @@ const neko = new nekoclient();
 
 module.exports = {
   name: "futanari",
-  aliases: ['futanari'],
+  aliases: ['futa'],
   usage: "futanari",
   description: "NSFW",
   run: async(client, message, args) => {
@@ -13,8 +13,10 @@ module.exports = {
 
       const GIF = await neko.nsfw.futanari();
       const embed = new Discord.MessageEmbed()
-        .setColor('#202225')
-        .setTitle(`${message.author.tag} here's a random blowjob image/gif`)
+        .setDescription(`${message.author.username} here's a random futanari image/gif`)
+        .setTitle("NSFW")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
         .setImage(GIF.url)
       message.channel.send(embed);
     } else {

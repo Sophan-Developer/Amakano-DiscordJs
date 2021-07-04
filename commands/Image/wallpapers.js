@@ -12,9 +12,10 @@ module.exports = {
 superagent.get('https://shiro.gg/api/images/wallpapers').end((err, response) => {
   const embed = new Discord.MessageEmbed()
   .setTitle("wallpapers")
+  .setDescription(`${message.author.username} here's a random walpaper for you`)
   .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: wallpapers`)
+  .setColor('#f01390')
+  .setFooter(`Requested by ${message.author.username}`)
   .setURL(response.body.url);
 message.channel.send(embed);
     })

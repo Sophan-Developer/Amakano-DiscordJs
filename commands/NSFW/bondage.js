@@ -15,8 +15,9 @@ superagent.get('https://shiro.gg/api/images/nsfw/bondage').end((err, response) =
   const embed = new Discord.MessageEmbed()
   .setTitle(":smirk: Bondage")
   .setImage(response.body.url)
-  .setColor('random')
-  .setFooter(`Tags: bondage`)
+  .setColor('#f01390')
+  .setFooter(`Requested by ${message.author.username}`)
+  .setDescription(`${message.author.username} here's a random blowjob image/gif`)
   .setURL(response.body.url);
 message.channel.send(embed);
 })

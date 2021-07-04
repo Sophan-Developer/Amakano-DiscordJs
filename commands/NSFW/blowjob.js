@@ -13,8 +13,10 @@ module.exports = {
 
       const GIF = await neko.nsfw.bJ();
       const embed = new Discord.MessageEmbed()
-        .setColor('#202225')
-        .setTitle(`${message.author.tag} here's a random blowjob image/gif`)
+        .setColor('#f01390')
+        .setTitle("NSFW")
+        .setFooter(`Requested by ${message.author.username}`)
+        .setDescription(`${message.author.username} here's a random blowjob image/gif`)
         .setImage(GIF.url)
       message.channel.send(embed);
     } else {

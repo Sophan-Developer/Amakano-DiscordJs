@@ -1,5 +1,5 @@
 const { Message, MessageEmbed } = require('discord.js');
-const discord = require('discord.js');
+const Discord = require('discord.js');
 
 const { NekoBot } = require("nekobot-api");
 const api = new NekoBot(`015445535454455354D6`);
@@ -13,7 +13,14 @@ module.exports = {
 
   
      const image = await api.get("coffee");
-     message.channel.send(image);
+     const embed = new Discord.MessageEmbed()
+        .setTitle(":coffee: Coffee")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
+        .setDescription(`Here's a coffee for you ${message.author.username}`)
+        .setImage(image)
+      message.channel.send(embed)
+
    
   }
 }

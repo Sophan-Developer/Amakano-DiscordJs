@@ -9,10 +9,11 @@ module.exports = {
   description: "NSFW",
   run: async(client, message, args) => {
 
-      const GIF = await neko.sfw.foxGirl();
-      const embed = new Discord.MessageEmbed()
-        .setColor('#202225')
-        .setTitle(`${message.author.tag} here's a random cat image/gif`)
+      const GIF = await neko.sfw.foxGirl()
+        .setTitle("FoxGirl")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
+        .setDescription(`Here's a random foxgirl image/gif`)
         .setImage(GIF.url)
       message.channel.send(embed);
   }

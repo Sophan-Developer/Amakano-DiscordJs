@@ -13,8 +13,11 @@ module.exports = {
 
       const GIF = await neko.nsfw.girlSoloGif();
       const embed = new Discord.MessageEmbed()
-        .setColor('#202225')
-        .setTitle(`${message.author.tag} here's a random girlsolo image/gif`)
+        .setDescription(`${message.author.username} here's a random 
+        solo girl gif`)
+        .setTitle("NSFW")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
         .setImage(GIF.url)
       message.channel.send(embed);
     } else {

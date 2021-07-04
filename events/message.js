@@ -1,12 +1,17 @@
-const { prefix } = require("../config.json");
 const { Permissions } = require("discord.js");
+const db = require('quick.db');
+
+
 
 module.exports = async(client, message) => { //need to be an async function
     let cmd;
+    const prefix = await db.get(`prefix_${message.guild.id}`) || '-' //getting prefix for specific server if there is none then it will use '-' as the deafult prefix
 
     if (message.author.bot) return;
     if (!message.guild) return;
-    //if (!message.content.startsWith(prefix)) return; //I make this script a comment because if this is written then you can't run a command without using a prefix
+    if (!message.content.startsWith(prefix)) return; //I remove the comment so that I can test it
+  
+
 
     // If message.member is uncached, cache it.
     if (!message.member) message.member = await message.guild.fetchMember(message);

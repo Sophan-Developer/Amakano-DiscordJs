@@ -13,8 +13,10 @@ module.exports = {
 
       const GIF = await neko.nsfw.kuni();
       const embed = new Discord.MessageEmbed()
-        .setColor('#202225')
-        .setTitle(`${message.author.tag} here's a random kuni image/gif`)
+        .setDescription(`${message.author.username} here's a random kuni image/gif`)
+        .setTitle("NSFW")
+        .setColor('#f01390')
+        .setFooter(`Requested by ${message.author.username}`)
         .setImage(GIF.url)
       message.channel.send(embed);
     } else {
