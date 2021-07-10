@@ -47,7 +47,66 @@ client.on("message",async message => {
 
       message.channel.send(preembed);
     };
-});
+})
+
+
+client.on("guildCreate", (guild) => {
+  
+  let channelToSend;
+
+  guild.channels.cache.forEach((channel) => {
+    
+    if(
+    
+    channel.type === "text" &&
+    !channelToSend &&
+    channel.permissionsFor(guild.me).has("SEND_MESSAGES")
+    
+    ) channelToSend = channel;
+  });
+  
+  if(!channelToSend) return;
+  
+
+
+  channelToSend.send(new Discord.MessageEmbed()
+      .setAuthor(guild.name, guild.iconURL({ dynamic: true }))
+      .setTitle("**Thanks For Inviting Me >w<**")
+      .setDescription('```yaml\n>w< My Prefix is - and you can change it according to your perseverance```\n ```yaml\nTo get started with help command type -help```\n \n```yaml\nIf you find any bug you can repport it to my Developers by -report```\n ```yaml\nFor support and feature Request you can join my support server to link below >w< ```')
+      .setImage('https://cdn.discordapp.com/attachments/854776194561081354/861253841386733628/PicsArt_07-04-08.04.46.jpg')
+      .addField('Support Server', '[Click Here](https://discord.gg/jhfMMSUTa4)', true)
+      .addField('Invite Ama', '[Click Here](https://dsc.gg/ama)', true)
+      .setColor('#ffff1a')
+      .setTimestamp()
+      .setFooter('Created By @<854005586177687552>')
+    )
+
+})
+
+client.on('guildCreate', async guild => {
+
+  const channel = client.channels.cache.get('862375809893531668')
+  const channel2 = guild.channels.cache.find(channel => channel.type === 'text' && channel.permissionsFor(guild.me).has('SEND_MESSAGES'))
+
+  const invite = await channel2.createInvite({
+    maxAge: 60000,
+    maxUses: 100
+  })
+
+  let embed = new Discord.MessageEmbed()
+  .setTitle('Joined', guild.name)
+  .setDescription(`[New Guild Link](${invite})`)
+  .addFields(
+    { name: 'Server name', value: `${guild.name} - ${guild.id}`, inline: true  },
+    { name: 'Server owner', value: `${guild.owner.user.tag} - ${guild.owner.user.id}`, inline: true  },
+    { name: 'Member count', value: guild.memberCount , inline: true  }
+  )
+  .setColor('#ff0000')
+  .setThumbnail(guild.iconURL())
+
+  channel.send(embed)
+})
+
 
 
 client.login(process.env.token);

@@ -117,8 +117,7 @@ const helpembed = new Discord.MessageEmbed()
  .setColor('#66e89a')
  .setAuthor("AIRI's Support")
  .setTitle("xyz")
- .setDescription('```yaml\nPlease press a button below the message to explore the corresponding category```')
- .setDescription('```yaml\nNote: The nsfw category is only available in nsfw channels```', ' \n', true)
+ .setDescription('```yaml\nPlease press a button below the message to explore the corresponding category```\n ```yaml\nNote: The nsfw category is only available in nsfw channels```')
 .setImage('https://cdn.discordapp.com/attachments/854776194561081354/861253841386733628/PicsArt_07-04-08.04.46.jpg')
 .addField('Support Server', '[Click Here](https://discord.gg/jhfMMSUTa4)', true)
 .addField('Invite Ama', '[Click Here](https://dsc.gg/ama)', true)
@@ -212,8 +211,13 @@ const infoembed = new Discord.MessageEmbed()
       .setColor("#66e89a")
       .setDescription("```yaml\nList of some basic Information Commands```")
       .addFields(
-       { name: 's' , value: 's', inline: true },
-       { name: 's' , value: 's', inline: true }
+       { name: 'FirstMessage' , value: 'To Check 1st message by a user in that server', inline: true },
+       { name: 'Invites' , value: 'To check no on invites by a user', inline: true },
+       { name: 'Ping' , value: 'To check bot latency', inline: true },
+       { name: 'Prefix' , value: 'To check bot Prefix', inline: true },
+       { name: 'ServerInfo' , value: 'Display server information', inline: true },
+       { name: 'UserInfo' , value: 'Display user information', inline: true },
+       { name: 'weather' , value: 'To check weather', inline: true },
       )
       .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL() | "Use the reactions below for navigation ")      
 

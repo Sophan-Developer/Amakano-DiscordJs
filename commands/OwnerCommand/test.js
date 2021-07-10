@@ -1,26 +1,31 @@
-const discord = require('discord.js');
 
+const Discord = require('discord.js')
 
 module.exports = {
- name: "t",
- aliases: [],
- usage: "test",
- description: "for test",
- run: async(client, message, args) => {
+  name: "test",
+  aliases: [],
+  usage: "test",
+  description: "send meme",
+  run: async(client, message, args) => {
 
-  if (message.author.id != message.guild.ownerID) {
-    const noOwner = new Discord.MessageEmbed()
-      .setAuthor(
-        `${message.author.username}#${message.author.discriminator}`,
-        message.author.displayAvatarURL({ dynamic: true })
-      )
-      .setTitle("Ownership Only:")
-      .setDescription(
-        `You have been stopped from forming a server via ${client.user.username} as you are missing ownership.`
-      )
-      .setColor(0xff0000)
-      .setFooter("Prefix: [-]");
-    message.channel.send(noOwner);
+let embed = new Discord.MessageEmbed()
+	.setColor('#ffff1a')
+	.setTitle('Amakano')
+	.setURL('https://discord.js.org/')
+	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
+	.addFields(
+		{ name: 'Regular field title', value: 'Some value here' },
+		{ name: '\u200B', value: '\u200B' },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+		{ name: 'Inline field title', value: 'Some value here', inline: true },
+	)
+	.addField('Inline field title', 'Some value here', true)
+	.setImage('https://i.imgur.com/wSTFkRM.png')
+	.setTimestamp()
+	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png')
+  message.channel.send(embed)    
+
   }
-}
 }

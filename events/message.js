@@ -37,3 +37,4 @@ module.exports = async(client, message) => { //need to be an async function
         command.run(client, message, args);
  
 }
+
