@@ -11,20 +11,14 @@ module.exports = {
 let embed = new Discord.MessageEmbed()
 	.setColor('#ffff1a')
 	.setTitle('Amakano')
-	.setURL('https://discord.js.org/')
-	.setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
-	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/wSTFkRM.png')
-	.addFields(
-		{ name: 'Regular field title', value: 'Some value here' },
-		{ name: '\u200B', value: '\u200B' },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
-		{ name: 'Inline field title', value: 'Some value here', inline: true },
-	)
-	.addField('Inline field title', 'Some value here', true)
-	.setImage('https://i.imgur.com/wSTFkRM.png')
+	.setURL('https://github.com/losier/Amakano-DiscordJs.git')
+
+	.setDescription(`Hi! Thanks for inviting me to your lovely server! :heart: \n \n*No dashboard is required! You can set up every function within your Discord client by running the corresponding command.* \n\`\`\`yaml\n \n• Just write -help to get an overview of all my commands and features \n \n• With -bug/-feedback/-report you can report us any bug or give give your feedback about client \n \n•And by joining our support server you can request command too\n \n\`\`\`\n`)
+  .addField('Support Server', '[Click Here](https://discord.gg/jhfMMSUTa4)', true)
+  .addField('Invite Ama', `[Click Here](${await client.generateInvite()})`, true)
+	.setImage('https://cdn.discordapp.com/attachments/854776194561081354/861253841386733628/PicsArt_07-04-08.04.46.jpg')
 	.setTimestamp()
-	.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png')
+	.setFooter('Created by @854005586177687552')
   message.channel.send(embed)    
 
   }

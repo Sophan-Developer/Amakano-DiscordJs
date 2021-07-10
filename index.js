@@ -50,7 +50,7 @@ client.on("message",async message => {
 })
 
 
-client.on("guildCreate", (guild) => {
+client.on("guildCreate",async (guild) => {
   
   let channelToSend;
 
@@ -70,18 +70,20 @@ client.on("guildCreate", (guild) => {
 
 
   channelToSend.send(new Discord.MessageEmbed()
+     	.setColor('#ffff1a')
+	    .setTitle('Amakano')
+	    .setURL('https://github.com/losier/Amakano-DiscordJs.git')
       .setAuthor(guild.name, guild.iconURL({ dynamic: true }))
-      .setTitle("**Thanks For Inviting Me >w<**")
-      .setDescription('```yaml\n>w< My Prefix is - and you can change it according to your perseverance```\n ```yaml\nTo get started with help command type -help```\n \n```yaml\nIf you find any bug you can repport it to my Developers by -report```\n ```yaml\nFor support and feature Request you can join my support server to link below >w< ```')
+      .setDescription(`Hi! Thanks for inviting me to your lovely server! >w< \n \n*No dashboard is required! You can set up every function within your Discord client by running the corresponding command.* \n\`\`\`yaml\n \n• Just write -help to get an overview of all my commands and features \n \n• With -bug/-feedback/-report you can report us any bug or give give your feedback about client \n \n•And by joining our support server you can request command too\n \n\`\`\`\n`)
       .setImage('https://cdn.discordapp.com/attachments/854776194561081354/861253841386733628/PicsArt_07-04-08.04.46.jpg')
       .addField('Support Server', '[Click Here](https://discord.gg/jhfMMSUTa4)', true)
-      .addField('Invite Ama', '[Click Here](https://dsc.gg/ama)', true)
-      .setColor('#ffff1a')
+      .addField('Invite Ama', `[Click Here](${await client.generateInvite()})`, true)
       .setTimestamp()
-      .setFooter('Created By @<854005586177687552>')
+	    .setFooter('Created by @854005586177687552')
     )
 
 })
+
 
 client.on('guildCreate', async guild => {
 
