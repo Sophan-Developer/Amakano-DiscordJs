@@ -1,5 +1,5 @@
 # Amakano-DiscordJs
-<b>A SIMPLE DISCORD BOTt</b>
+<b>A SIMPLE DISCORD BOT</b>
 
 <img src="https://cdn.discordapp.com/attachments/863485640880160819/863485862004260934/PicsArt_07-04-08.04.46.jpg" />
 
