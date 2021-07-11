@@ -4,13 +4,11 @@ const moment = require("moment");
 const fetch = require("node-fetch")
 
 module.exports = {
-    config: {
         name: "github",
         description: "Github User Account Information!",
         usage: "github <name>",
         example: "github roblox",
-        aliases: ["git"]
-    },
+        aliases: ["git"],
     run: async (client, message, args) => {
 
        try {

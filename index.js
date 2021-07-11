@@ -103,7 +103,7 @@ client.on('guildCreate', async guild => {
     { name: 'Server owner', value: `${guild.owner.user.tag} - ${guild.owner.user.id}`, inline: true  },
     { name: 'Member count', value: guild.memberCount , inline: true  }
   )
-  .setColor('#ff0000')
+  .setColor('#00ff00')
   .setThumbnail(guild.iconURL())
 
   channel.send(embed)
