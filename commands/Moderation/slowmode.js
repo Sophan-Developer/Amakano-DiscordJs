@@ -10,7 +10,11 @@ module.exports = {
   if (message.author.bot) return;
   if (!message.member.hasPermission('MANAGE_MESSAGES'))
     return message.channel.send(
-      'You dont permission to execute this command.',
+      new Discord.MessageEmbed()
+        .setTitle("**SlowMode**")
+        .setColor('ffffff')
+        .setDescription(`\`\`\`yaml\n${message.author.username} you dont have *MANAGE_MESSAGES* permissiom to execute this command\n\`\`\``)
+        .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL())
     );
   const messageArray = message.content.split(' ');
   const args = messageArray.slice(1);
@@ -18,20 +22,43 @@ module.exports = {
   const MAX_SECONDS = 21600;
 
   if (isNaN(seconds)) {
-    return message.channel.send('You need to specify time in seconds!');
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**SlowMode**")
+        .setColor('ffffff')
+        .setDescription(`\`\`\`yaml\n${message.author.username} you need to specify time in second\n\`\`\``)
+        .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL())
+    );
   }
 
   if (seconds > MAX_SECONDS) {
     return message.channel.send(
-      `The maximum number of seconds is ${MAX_SECONDS}.`,
+      new Discord.MessageEmbed()
+        .setTitle("**SlowMode**")
+        .setColor('ffffff')
+        .setDescription(`\`\`\`yaml\n${message.author.username} maximum number of second is ${MAX_SECONDS}\n\`\`\``)
+        .setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL())
     );
   }
 
   try {
     await message.channel.setRateLimitPerUser(seconds);
-    message.channel.send(`Slowmode is now ${seconds}s`);
+    message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**SlowMode**")
+        .setColor('ffffff')
+        .setDescription(`\`\`\`yaml\nSlowmode has been enabled for ${seconds} second.\n\`\`\``)
+        .addField('Slowmode is enabled by:', `${message.author.username}`, true)
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.username}`)     
+    );
   } catch (error) {
-    message.channel.send('Oops, there is a problem with that command');
+    message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle('**SlowMode**')
+        .setColor('ffffff') 
+        .setDescription("```yaml\nOops, There is an error please try again.```")     
+    );
     console.log(error);
   }
 
