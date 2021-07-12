@@ -7,37 +7,66 @@ module.exports = {
   description: "to ban member",
   run: (client, message, args) => {
     
-     const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]) ||
-      args[0];
 
-    if (!args[0])
-      return message.reply(
-        "Please specify either the user's ID or mention the user for this command to work."
-      );
+//args n mentions stuff
+  let banreason = args.slice(1).join(" ");
+  const user = message.mentions.users.first();
 
-    if (!member)
-      return message.channel.send(
-        "I can't seem to find this user in this discord server.."
-      );
-    if (!member.bannable)
-      return message.reply(
-        "This user can't be banned. It is either because they are a Mod/Admin, or their highest role is higher than mine, or they are not in the server at all."
-      );
+//reply of errors
+  if (!message.member.hasPermission("BAN_MEMBERS"))
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle('**Ban**')
+        .setColor('#ffffff')
+        .setDescription("```yaml\nYou don't have enough premission to use this command```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(message.author.tag)            
+    );
+  
+  if(!banreason)
+    banreason = "Unspecified :(" 
 
-    let reason = args.slice(1).join(" ");
+  if(!user)
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle('**Ban**')
+        .setColor('#ffffff')
+        .setDescription("```yaml\nPlease mention a user for this command to work.```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(message.author.tag)      
+    )  
 
-    if (!reason) reason = "Unspecified";
+  if(user === message.author)
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle('**Ban**')
+        .setColor('#ffffff')
+        .setDescription("```yaml\nYou can't ban yourself Idiot!```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(message.author.tag)     
+    )  
 
-    const banembed = new Discord.MessageEmbed()
-      .setColor("#00FFFF")
-      .setTitle("Member Banned")
-      .setThumbnail(member.user.displayAvatarURL())
-      .addFields(
+  if(!message.guild.member(user).bannable) 
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle('**Ban**')
+        .setColor('#ffffff')
+        .setDescription("```yaml\nThis user can't be banned.```\n```yaml\nIt is either because\n\n• They are a Mod/Admin\n• Their highest role is higher than mine\n• They are not in the server at all.```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(message.author.tag)       
+    ) 
+
+
+//ban embed 
+  let banembed = new Discord.MessageEmbed()
+    .setTitle('**Ban**')
+    .setColor('#ff0000')
+    .setThumbnail(user.displayAvatarURL())
+    .setDescription(`\`\`\`yaml\n✅ ${user.tag} has been successfully banned!\n\`\`\``)
+    .addFields(
         {
           name: "Member Banned:",
-          value: member
+          value: user 
         },
         {
           name: "Banned by Moderator:",
@@ -45,28 +74,24 @@ module.exports = {
         },
         {
           name: "For Reason:",
-          value: reason
+          value: banreason
         }
       )
-      .setFooter("Time Banned:", message.author.displayAvatarURL())
-      .setTimestamp();
-    member
-      .send(banembed)
-      .then(() => {
-        message.guild.members.ban(member, { reason: reason });
+    .setFooter("Time Banned:", message.author.displayAvatarURL())
+    .setTimestamp();
 
-        message.channel.send(
-          `${message.author} that user is successfully banned, check the punish-logs.`
-        );
+    user.send(banembed)
+
+      .then(() => {
+        message.guild.members.ban(user, { reason: banreason });
+
         message.channel.send(banembed);
       })
+
       .catch(() => {
-        message.guild.members.ban(member, { reason: reason });
-        message.channel.send(
-          `${message.author} that user is successfully banned, check the punish-logs.`
-        );
+        message.guild.members.ban(user, { reason: banreason });
+
         message.channel.send(banembed);
-      });
+      });          
   }
 }
-

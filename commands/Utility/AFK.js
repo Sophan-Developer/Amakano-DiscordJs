@@ -18,12 +18,13 @@ module.exports = {
    const setreason = reason[Math.floor(Math.random() * reason.length)]
 
 
+  
     if(!content) {
 
     await db.set(`afk-${message.author.id}+${message.guild.id}`, content)
         const embed = new Discord.MessageEmbed()
         .setTitle("**AFK**")
-        .setDescription(`\`\`\`yaml\n${message.author.username} I set your AFK.\n\`\`\`\n**Reason :** \`\`\`yaml\n${setreason}\n\`\`\``)
+        .setDescription(`\`\`\`yaml\n${message.author.username} I set your AFK.\n\`\`\`\n**Reason :** \`\`\`yaml\n${setreason}\n\`\`\`\n\`\`\`${message.author.username} you haven't provided any reason so here is a self-genreated reason\n\`\`\``)
         .setColor("GREEN")
         .setThumbnail(message.author.displayAvatarURL())
         .setTimestamp()
@@ -43,14 +44,15 @@ module.exports = {
 
 client.on("message",async message => {
 
+  const content = args.join(" ") 
+
  if (message.content.includes('@here') || message.content.includes('@everyone'))
   return false; 
 
  if (message.author.bot) return;
 
- if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
+ if(await db.has(`afk-${message.author.id}+${message.guild.id}`)) {
 
-    const info = db.get(`afk-${message.author.id}+${message.guild.id}`)
     await db.delete(`afk-${message.author.id}+${message.guild.id}`)
 
       let afkdone = new Discord.MessageEmbed()
@@ -73,11 +75,11 @@ client.on("message",async message => {
     
   const user = message.mentions.users.first()  
 
-      if(db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
+      if(await db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`, content)) {
 
        let rdone = new Discord.MessageEmbed()
         .setTitle("**AFK**")
-        .setDescription(`\`\`\`yaml\n${user.username} is AFK.\n\`\`\`\n\`\`\`yaml\nIf its Important you can leave a message within 20 seconds and i'll deliver it to ${user.username}\n\`\`\``)
+        .setDescription(`\`\`\`yaml\n${user.username} is AFK.${content}\n\`\`\`\n\`\`\`yaml\nIf its Important you can leave a message within 20 seconds and i'll deliver it to ${user.username}\n\`\`\``)
         .setColor("GREEN")
         .setThumbnail(user.avatarURL())
         .setTimestamp()
@@ -104,7 +106,7 @@ client.on("message",async message => {
 			      message.channel.send(
               new Discord.MessageEmbed()
                 .setTitle("**AFK**")
-                .setDescription(`\`\`\`yaml\n:no_entry_sign: Timeout. If its still important you can send your text to ${user.username} by DM.\n\`\`\``)
+                .setDescription(`\`\`\`yaml\n Timeout. If its still important you can send your text to ${user.username} by DM.\n\`\`\``)
                 .setColor("GREEN")
                 .setThumbnail(user.avatarURL())
                 .setTimestamp()
