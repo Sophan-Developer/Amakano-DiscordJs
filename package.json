@@ -59,7 +59,7 @@
     "srod-v2": "^1.0.2",
     "superagent": "^6.1.0",
     "weather-js": "^2.0.0",
-    "weky": "^2.0.9"
+    "weky": "^3.1.0"
   },
   "engines": {
     "node": "12.x"

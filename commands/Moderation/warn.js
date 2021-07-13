@@ -7,37 +7,119 @@ module.exports = {
   usage: "warn",
   description: "to warn",
   run: async (client, message, args) => {
-        if(!message.member.hasPermission("MANAGE_SERVER")) return message.channel.send('You can\'t use that');
 
-        const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
+  if(!message.member.hasPermission("MANAGE_SERVER"))
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Warn**")
+        .setColor('#ff3333')
+        .setDescription("```yaml\nYou dont't have MANAGE_SERVER permission to use this command.```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.tag}`)
+    );
 
-        if(!user) return message.channel.send('Please specify a user, via mention or ID');
+  const user = message.mentions.users.first();
 
-        if(user.bot) return message.channel.send('You can\'t warn bots');
+  if(!user) 
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Warn**")
+        .setColor('#ff3333')
+        .setDescription("```yaml\nPlease mention someone to warn.```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.tag}`)      
+    );
 
-        if(message.author.id === user.id) return message.channel.send('You can\'t warn yourself nitwit');
+  if(user.bot)
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Warn**")
+        .setColor('#ff3333')
+        .setDescription("```yaml\nYou can't warn/unwarn/remove warn a bot idiot!```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.tag}`)      
+    );
 
-        if(message.guild.owner.id === user.id) return message.channel.send('You can\'t warn the server\'s owner');
+  if(user.id === message.author.id) 
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Warn**")
+        .setColor('#ff3333')
+        .setDescription("```yaml\nYou can't warn yourself IDIOT!```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.tag}`)        
+    );
 
-        let reason = args.slice(1).join(" ");
+  if(message.guild.owner.id === user.id) 
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Warn**")
+        .setColor('#ff3333')
+        .setDescription("```yaml\nYou can't warn SERVER OWNER.```")
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.tag}`)       
+    );
 
-        if(!reason) reason = 'Unspecified';
+  let reason = args.slice(1).join(" ");
 
-        let warnings = db.get(`warnings_${message.guild.id}_${user.id}`);
+  if(!reason) 
+    reason = 'Unspecified :(';
 
-        if(warnings === 3) return message.channel.send(`${user} has already reached three warnings`);
+  let warnings = await db.get(`warnings_${message.guild.id}_${user.id}`);
 
+  if(warnings === 5) 
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Warn**")
+        .setColor('#ff3333')
+        .setDescription(`\`\`\`yaml\n${user.username} has already reached 5 warnings.\n\`\`\``)
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(`Requested by ${message.author.tag}`)      
+    );
 
-        if(warnings === null) {
-            db.set(`warnings_${message.guild.id}_${user.id}`, 1);
-            user.send(`You were warned in ${message.guild.name} for the follwoing reason: \`${reason}\``)
-            await message.channel.send(`**${user.username}** has been warned`)
-        }
+  if(warnings === null) {
+    await db.set(`warnings_${message.guild.id}_${user.id}`, 1);
+      user.send(
+        new Discord.MessageEmbed()
+          .setTitle("**Warn**")
+          .setColor('#ff3333')
+          .setDescription(`\`\`\`yaml\n${user.username} you have been warned in ${message.guild.name}.\n\`\`\`\n**Reason :** \`\`\`yaml\n${reason}\n\`\`\``)
+          .setThumbnail(message.author.displayAvatarURL())
+          .addField('Moderator Name:', `${message.author.username}`)
+          .setTimestamp()          
+      )
+      
+      await message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle("**Warn**")
+          .setColor('#ff3333')
+          .setDescription(`\`\`\`yaml\n${user.username} has been warned by ${message.author.username}\n\`\`\``)
+          .setThumbnail(user.displayAvatarURL())
+          .setFooter(`Requested by ${message.author.tag}`)     
+      )
+  }
 
-        if(warnings !== null){
-            db.add(`warnings_${message.guild.id}_${user.id}`, 1)
-            user.send(`You were warned in ${message.guild.name} for the follwoing reason: \`${reason}\``)
-            await message.channel.send(`**${user.username}** has been warned`)
-        }
+  if(warnings !== null) {
+    await db.add(`warnings_${message.guild.id}_${user.id}`, 1);
+      user.send(
+        new Discord.MessageEmbed()
+          .setTitle("**Warn**")
+          .setColor('#ff3333')
+          .setDescription(`\`\`\`yaml\n${user.username} you have been warned in ${message.guild.name}.\n\`\`\`\n**Reason :** \`\`\`yaml\n${reason}\n\`\`\``)
+          .setThumbnail(message.author.displayAvatarURL())
+          .addField('Moderator Name:', `${message.author.username}`)
+          .setTimestamp()          
+      )
+      
+      await message.channel.send(
+        new Discord.MessageEmbed()
+          .setTitle("**Warn**")
+          .setColor('#ff3333')
+          .setDescription(`\`\`\`yaml\n${user.username} has been warned by ${message.author.username}\n\`\`\``)
+          .setThumbnail(user.displayAvatarURL())
+          .setFooter(`Requested by ${message.author.tag}`)     
+      )
+  }
+
   }
 }

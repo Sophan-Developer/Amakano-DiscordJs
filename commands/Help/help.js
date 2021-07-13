@@ -50,7 +50,7 @@ let funbutton = new button.MessageButton()
 let gamebutton = new button.MessageButton()
 .setLabel('Game')
 .setStyle('blurple')
-.setID('gamesbutton')
+.setID('gamebutton')
 
 //rp button //will contain emotes n nsfw button
 let rpbutton = new button.MessageButton()

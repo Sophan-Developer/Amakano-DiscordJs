@@ -6,16 +6,51 @@ module.exports = {
   usage: "unmute",
   description: "to unmute",
   run: async (client, message, args) => {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send("You are not allowed to run this command");
 
-        let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
+  if (!message.member.hasPermission("MANAGE_ROLES")) {
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Unmute**")
+        .setColor('ff3333')
+        .setDescription(`\`\`\`yaml\n${message.author.username} you don't have MANAGE_ROLES permission to use this command.\n\`\`\``)
+        .setThumbnail(message.author.displayAvatarURL())
+        .setFooter(message.author.tag)
+    );
+  }
 
-        let role = message.guild.roles.cache.find(x => x.name === "Muted");
+  let user = message.mentions.members.first();
 
-        if(user.roles.cache.has(role)) return message.channel.send("This member isn't muted");
+  let role = message.guild.roles.cache.find(x => x.name === "Muted");
 
-        user.roles.remove(role);
+  if(user.roles.cache.has(role)) 
+    return message.channel.send(
+      new Discord.MessageEmbed()
+        .setTitle("**Unmute**")
+        .setColor('ff3333')
+        .setDescription(`\`\`\`yaml\n${message.author.username}, ${user.username} isn't muted.\n\`\`\``)
+        .setThumbnail(user.displayAvatarURL())
+        .setFooter(message.author.tag)        
+    );
 
-        message.channel.send(`${user} has been unmuted`)
+  user.roles.remove(role);
+
+  user.send(
+    new Discord.MessageEmbed()
+      .setTitle("**Unmute**")
+      .setColor('#ff3333')
+      .setDescription(`\`\`\`yaml\n${user.username} you have been Unmuted in ${message.guild.name}\n\`\`\``)
+      .setThumbnail(message.author.displayAvatarURL())
+      .addField('Moderator Name:', `${message.author.username}`)
+      .setTimestamp()          
+  )
+      
+  await message.channel.send(
+    new Discord.MessageEmbed()
+      .setTitle("**Unmute**")
+      .setColor('#ff3333')
+      .setDescription(`\`\`\`yaml\n${user.username} has been Unmuted by ${message.author.username}\n\`\`\``)
+      .setThumbnail(user.displayAvatarURL())
+      .setFooter(`Requested by ${message.author.tag}`)     
+  )
   }
 }
